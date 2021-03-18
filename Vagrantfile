@@ -43,6 +43,8 @@ Vagrant.configure("2") do |config|
         cvlc.vm.provider "virtualbox" do |v|
             v.memory = 4096
             v.cpus = 4
+            v.customize ["modifyvm", :id, "--vrde", "on"]
+            v.customize ["modifyvm", :id, "--vrdeport", "19101"]
         end
         cvlc.vm.provision "ansible" do |ansible| 
             ansible.playbook = "host-setup/clientVlc/clientVlc-playbook.yml"
